@@ -7,6 +7,10 @@ Bienvenido al repositorio unificado de los proyectos **Digital Buho API - SOPORT
 
 ---
 
+# ℹ️ Información Importante sobre el Proyecto
+
+---
+
 ### 🕐 Tiempo de Arranque en Render (Modo Gratuito)
 
 Ten en cuenta que el proyecto está desplegado en **Render** bajo un plan gratuito.  

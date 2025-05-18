@@ -19,7 +19,7 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Copiamos el .jar desde la etapa de build
-COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/app.jar app.jar
 
 ARG PORT=8080
 EXPOSE ${PORT}
