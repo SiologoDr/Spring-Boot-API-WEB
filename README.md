@@ -165,6 +165,12 @@ Proyecto desarrollado como parte de una solución empresarial y académica usand
 
 ---
 
+## 🙋 ¿Quieres contribuir?
+
+Consulta nuestra [Guía de Contribución](CONTRIBUTING.md) para comenzar.
+
+---
+
 ## 🤝 Contribuciones
 
 ¡Contribuciones, mejoras o reportes de bugs son bienvenidos!  
