@@ -21,7 +21,8 @@ WORKDIR /app
 # Copiamos el .jar desde la etapa de build
 COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8080
+ARG PORT=8080
+EXPOSE ${PORT}
 
 # Comando que ejecuta la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]

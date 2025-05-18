@@ -7,6 +7,38 @@ Bienvenido al repositorio unificado de los proyectos **Digital Buho API - SOPORT
 
 ---
 
+### 🕐 Tiempo de Arranque en Render (Modo Gratuito)
+
+Ten en cuenta que el proyecto está desplegado en **Render** bajo un plan gratuito.  
+Cuando no se ha usado en un tiempo, **Render apaga automáticamente el servidor** para ahorrar recursos.
+
+> Al acceder al enlace, Render comenzará a reactivar la aplicación. Este proceso puede tardar entre **1 y 5 minutos**.
+
+📌 **Te pedimos paciencia** durante este arranque inicial. Una vez el backend esté activo, la API funcionará con normalidad.
+
+---
+
+### 🛑 Consideración sobre la Base de Datos Supabase
+
+La base de datos está alojada en **Supabase**, y también puede entrar en estado inactivo si no se ha usado recientemente.
+
+- Si obtienes errores al probar los endpoints, es probable que la base de datos esté **apagada**.
+- Para evitar esto, recomendamos que **clones el proyecto y configures una base de datos local** (PostgreSQL) en tu entorno.
+
+🔧 Cambia los parámetros de conexión en `application.properties` o `application.yml` para apuntar a tu propia base de datos.
+
+---
+
+### ⏳ Paciencia y Comprensión
+
+Este proyecto ha sido desarrollado con fines educativos y demostrativos.  
+Puede haber **ligeras demoras** o comportamientos inactivos debido al uso de servicios gratuitos.
+
+🙌 **Te agradecemos tu paciencia y comprensión.**  
+Cualquier mejora o sugerencia es bienvenida mediante Pull Requests o Issues.
+
+---
+
 ## 🚀 Descripción General
 
 El sistema está diseñado para resolver la problemática de accesibilidad, gestión eficiente y estandarizada de datos mediante una arquitectura RESTful, facilitando la interacción entre clientes, desarrolladores, técnicos de soporte y administradores.
