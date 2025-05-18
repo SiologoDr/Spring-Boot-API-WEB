@@ -1,31 +1,80 @@
 
-# 📘 Digital Buho API - SOPORTE
+# 📘 Digital Buho API - Sistema de Soporte y Gestión Web
 
-Bienvenido al repositorio oficial de **Digital Buho API - SOPORTE**, un backend desarrollado con **Spring Boot** que ofrece servicios RESTful para la gestión de soporte técnico en una plataforma de cursos alternativos y accesibles.
+![Spring Boot Logo](https://spring.io/img/spring.svg)
+
+Bienvenido al repositorio unificado de los proyectos **Digital Buho API - SOPORTE** y **Spring Boot API WEB**. Este sistema combina una API RESTful robusta y un conjunto de controladores web, desarrollado con **Spring Boot**, para la gestión integral de datos de soporte técnico y entidades empresariales.
+
+---
 
 ## 🚀 Descripción General
 
-Esta API forma parte de una solución empresarial desarrollada para **Digital Buho SAC**, cuya misión es brindar soporte técnico eficiente y accesible para plataformas educativas. La arquitectura se basa en microservicios utilizando Spring Boot, documentada con Swagger, desplegada en la nube y lista para integrarse con diversos clientes frontend.
+El sistema está diseñado para resolver la problemática de accesibilidad, gestión eficiente y estandarizada de datos mediante una arquitectura RESTful, facilitando la interacción entre clientes, desarrolladores, técnicos de soporte y administradores.
+
+Se implementa con Spring Boot y se documenta con Swagger para un consumo intuitivo. Está desplegado en la nube y listo para producción.
+
+---
+
+## 🎯 Objetivos del Proyecto
+
+### Objetivo General
+Desarrollar una API RESTful robusta y segura para gestionar información empresarial, accesible mediante controladores REST y web.
+
+### Objetivos Específicos
+- Implementar operaciones CRUD completas para todas las entidades.
+- Documentar la API utilizando Swagger.
+- Crear una estructura modular y escalable.
+- Desarrollar controladores web para vistas específicas.
+- Desplegar la aplicación en la nube con disponibilidad continua.
+
+---
 
 ## 🧩 Tecnologías Utilizadas
 
 - **Java 17+**
-- **Spring Boot**
-- **Supabase (PostgreSQL)**
-- **Swagger (Documentación)**
-- **Postman (Pruebas)**
-- **Render (Despliegue en la nube)**
+- **Spring Boot 3.x**
+- **Spring Data JPA**
+- **PostgreSQL (Supabase)**
+- **Swagger / OpenAPI 3.0**
+- **Maven**
+- **Postman**
+- **Render (Cloud Hosting)**
+
+---
 
 ## 📂 Estructura del Proyecto
 
+### Backend Principal (`/src/main/java`)
+
 ```bash
-├── controller/       # Controladores REST
-├── model/            # Entidades del dominio
-├── repository/       # Interfaces de acceso a datos
-├── service/          # Lógica de negocio
-├── configuration/    # Configuraciones generales
+├── controllers/       # Controladores REST
+├── models/            # Entidades de la BD
+├── repositories/       # Interfaces de acceso a datos
+├── services/          # Lógica de negocio
+├── web/    # Controladores WEB
+└── ApirestApplication  # Arranque del proyecto
+```
+
+### Plantillas Web (`/src/main/resources/templates`)
+
+```bash
+├── web-asignacion/  # Vistas del CRUD de ASIGNACION
+├── web-cliente/  # Vistas del CRUD de CLIENTE
+├── web-desarrollador/  # Vistas del CRUD de DESARROLLADOR
+├── web-estado/  # Vistas del CRUD de ESTADO
+├── web-notificacion-cliente/  # Vistas del CRUD de NOTIFICACION C
+├── web-notificacion-desarrollador/  # Vistas del CRUD de NOTIFICACION D
+├── web-persona/  # Vistas del CRUD de PERSONA
+├── web-revision/  # Vistas del CRUD de REVISION
+├── web-rol/  # Vistas del CRUD de ROL
+├── web-solicitud/  # Vistas del CRUD de SOLICITUD
+├── web-tecnico/  # Vistas del CRUD de TECNICO
+├── web-usuario/  # Vistas del CRUD de USUARIO
+├── index.html/  # Vista Principal de la WEB
 └── application.properties  # Configuración del proyecto
 ```
+
+---
 
 ## 🌐 Endpoints RESTful
 
@@ -37,35 +86,52 @@ Esta API forma parte de una solución empresarial desarrollada para **Digital Bu
 | PUT    | `/api/{tabla}/actualizar/{id}`| Actualizar    |
 | DELETE | `/api/{tabla}/eliminar/{id}`  | Eliminar      |
 
-## 🔎 Documentación
+---
 
-La API cuenta con documentación Swagger integrada para facilitar el desarrollo y pruebas. Una vez desplegada, accede a:
+## 🧪 Pruebas y Documentación
+
+- **Postman**: Incluye pruebas para cada operación CRUD.
+- **Swagger**: Documentación interactiva disponible en:
 
 ```
-https://digital-buho-api-soporte.onrender.com/swagger-ui/index.html
+https://spring-boot-api-web.onrender.com/swagger-ui/index.html
 ```
 
-## 📦 Pruebas con Postman
+---
 
-Todas las rutas han sido probadas con Postman, incluyendo los métodos:
+## 🛠 Instalación y Ejecución Local
 
-- `GET`: Listado general e individual.
-- `POST`: Creación de registros.
-- `PUT`: Actualización de datos.
-- `DELETE`: Eliminación de entradas.
+### Requisitos Previos
 
-## ☁️ Despliegue
+- Java JDK 17+
+- Maven 3.6+
 
-El proyecto está **en producción** gracias a Render y accesible en el siguiente enlace:
+### Pasos
 
-🔗 [API en producción](https://digital-buho-api-soporte.onrender.com/)
+```bash
+git clone https://github.com/SiologoDr/Spring-Boot-API-WEB.git
+cd Spring-Boot-API-WEB
+mvn clean install
+mvn spring-boot:run
+```
 
-## 📎 Enlaces del Proyecto
+Aplicación disponible en: `http://localhost:8080`
 
-- 🔗 [Repositorio en GitHub](https://github.com/SiologoDr/Digital-Buho-API-SOPORTE)
-- 🔗 [API en la nube](https://digital-buho-api-soporte.onrender.com/)
+---
+
+## ☁️ Despliegue en Producción
+
+- 🌐 [API Web Desplegada](https://spring-boot-api-web.onrender.com/)
+
+---
 
 ## 👤 Autor
 
 **Digital Buho SAC**  
-Proyecto desarrollado en el marco de un curso de negocios modernos con tecnología Java Spring Boot.
+Proyecto desarrollado como parte de una solución empresarial y académica usando tecnologías modernas Java con Spring Boot.
+
+---
+
+## 📝 Licencia
+
+Licenciado bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
