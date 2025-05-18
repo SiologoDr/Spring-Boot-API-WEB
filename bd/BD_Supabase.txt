@@ -1,0 +1,146 @@
+-- Rol
+CREATE TABLE rol (
+    id_rol SERIAL PRIMARY KEY,
+    rol VARCHAR(100) NOT NULL UNIQUE CHECK (rol IN ('CLIENTE', 'DESARROLLADOR', 'TECNICO')),
+    descripcion VARCHAR(100)
+);
+
+-- Usuario
+CREATE TABLE usuario (
+    id_usuario SERIAL PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL UNIQUE,
+    contraseña VARCHAR(50) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_rol INT NOT NULL REFERENCES rol(id_rol) ON DELETE CASCADE
+);
+
+-- Trigger para actualizar fecha_actualizacion
+CREATE OR REPLACE FUNCTION actualizar_fecha_actualizacion()
+RETURNS TRIGGER AS $$
+BEGIN
+   NEW.fecha_actualizacion = NOW();
+   RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_usuario_actualizacion
+BEFORE UPDATE ON usuario
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Persona
+CREATE TABLE persona (
+    id_persona SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    telefono VARCHAR(20) NOT NULL UNIQUE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_usuario INT NOT NULL UNIQUE REFERENCES usuario(id_usuario) ON DELETE CASCADE
+);
+
+CREATE TRIGGER trg_persona_actualizacion
+BEFORE UPDATE ON persona
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Cliente
+CREATE TABLE cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    ruc VARCHAR(20) NOT NULL UNIQUE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_persona INT NOT NULL UNIQUE REFERENCES persona(id_persona) ON DELETE CASCADE
+);
+
+CREATE TRIGGER trg_cliente_actualizacion
+BEFORE UPDATE ON cliente
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Técnico
+CREATE TABLE tecnico (
+    id_tecnico SERIAL PRIMARY KEY,
+    especialidad VARCHAR(100) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_persona INT NOT NULL UNIQUE REFERENCES persona(id_persona) ON DELETE CASCADE
+);
+
+CREATE TRIGGER trg_tecnico_actualizacion
+BEFORE UPDATE ON tecnico
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Desarrollador
+CREATE TABLE desarrollador (
+    id_desarrollador SERIAL PRIMARY KEY,
+    area VARCHAR(100) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_persona INT NOT NULL UNIQUE REFERENCES persona(id_persona) ON DELETE CASCADE
+);
+
+CREATE TRIGGER trg_desarrollador_actualizacion
+BEFORE UPDATE ON desarrollador
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Estado
+CREATE TABLE estado (
+    id_estado SERIAL PRIMARY KEY,
+    estado VARCHAR(50) NOT NULL UNIQUE CHECK (estado IN ('EN_ESPERA', 'EN_DESARROLLO', 'FINALIZADO')),
+    descripcion VARCHAR(100)
+);
+
+-- Revisión
+CREATE TABLE revision (
+    id_revision SERIAL PRIMARY KEY,
+    revision VARCHAR(50) NOT NULL UNIQUE CHECK (revision IN ('EN_ESPERA', 'APROBADO', 'RECHAZADO')),
+    descripcion VARCHAR(100)
+);
+
+-- Solicitud
+CREATE TABLE solicitud (
+    id_solicitud SERIAL PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
+    observacion VARCHAR(50),
+    prioridad VARCHAR(20) CHECK (prioridad IN ('ALTA', 'MEDIA', 'BAJA')),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_cliente INT NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,
+    id_tecnico INT REFERENCES tecnico(id_tecnico) ON DELETE CASCADE,
+    id_estado INT NOT NULL DEFAULT 1 REFERENCES estado(id_estado) ON DELETE CASCADE,
+    id_revision INT NOT NULL DEFAULT 1 REFERENCES revision(id_revision) ON DELETE CASCADE
+);
+
+CREATE TRIGGER trg_solicitud_actualizacion
+BEFORE UPDATE ON solicitud
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_fecha_actualizacion();
+
+-- Notificación Cliente
+CREATE TABLE notificacion_cliente (
+    id_notificacion_cliente SERIAL PRIMARY KEY,
+    observacion VARCHAR(100) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_solicitud INT NOT NULL REFERENCES solicitud(id_solicitud) ON DELETE CASCADE
+);
+
+-- Asignación
+CREATE TABLE asignacion (
+    id_asignacion SERIAL PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_solicitud INT NOT NULL REFERENCES solicitud(id_solicitud) ON DELETE CASCADE,
+    id_desarrollador INT NOT NULL REFERENCES desarrollador(id_desarrollador) ON DELETE CASCADE
+);
+
+-- Notificación Desarrollador
+CREATE TABLE notificacion_desarrollador (
+    id_notificacion_desarrollador SERIAL PRIMARY KEY,
+    observacion VARCHAR(100) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    id_asignacion INT NOT NULL REFERENCES asignacion(id_asignacion) ON DELETE CASCADE
+);

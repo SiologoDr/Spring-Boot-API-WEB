@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nueva Solicitud</title>
+</head>
+<body>
+
+<style>
+    .navbar {
+      background-color: #2c3e50;
+      padding: 15px 30px;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background-color: #2c3e50;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      padding: 10px 0;
+    }
+
+    .nav-links a {
+      padding: 12px 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      background-color: #34495e;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+</style>
+
+<div class="navbar">
+    <div class="brand">DIGITAL BUHO</div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <nav class="nav-links" id="navMenu">
+        <a href="/">Inicio</a>
+        <a href="/roles">Roles</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/personas">Personas</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/tecnicos">Técnicos</a>
+        <a href="/desarrolladores">Desarrolladores</a>
+        <a href="/estados">Estados</a>
+        <a href="/revisiones">Revisiones</a>
+        <a href="/solicitudes">Solicitudes</a>
+        <a href="/notificaciones-clientes">Notificaciones Clientes</a>
+        <a href="/asignaciones">Asignaciones</a>
+        <a href="/notificaciones-desarrolladores">Notificaciones Desarrolladores</a>
+    </nav>
+</div>
+
+<h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; margin-top: 20px; text-align: center;">
+    Crear Nueva Solicitud
+</h1>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+">
+<form th:action="@{/solicitudes/guardar}" th:object="${solicitudObj}" method="post"
+      style="
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        ">
+
+    <label for="descripcion" style="display: block; margin-bottom: 8px; font-weight: bold;">Descripción:</label>
+    <textarea th:field="*{descripcion}" id="descripcion" rows="3" required
+              style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+
+    <label for="observacion" style="display: block; margin-bottom: 8px; font-weight: bold;">Observación:</label>
+    <textarea th:field="*{observacion}" id="observacion" rows="2" required
+              style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+
+    <label for="prioridad" style="display: block; margin-bottom: 8px; font-weight: bold;">Prioridad:</label>
+    <select th:field="*{prioridad}" id="prioridad" required
+            style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;">
+        <option value="BAJA">BAJA</option>
+        <option value="MEDIA">MEDIA</option>
+        <option value="ALTA">ALTA</option>
+    </select>
+
+    <label for="cliente" style="display: block; margin-bottom: 8px; font-weight: bold;">Cliente:</label>
+    <select th:field="*{cliente.id_cliente}" id="cliente" required
+            style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;">
+        <option value="" selected>Selecciona un cliente</option>
+        <option th:each="cliente : ${clientesLista}" th:value="${cliente.id_cliente}" th:text="${cliente.persona.nombre}"></option>
+    </select>
+
+    <label for="tecnico" style="display: block; margin-bottom: 8px; font-weight: bold;">Técnico:</label>
+    <select th:field="*{tecnico.id_tecnico}" id="tecnico" required
+            style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;">
+        <option value="" selected>Selecciona un tecnico</option>
+        <option th:each="tecnico : ${tecnicosLista}" th:value="${tecnico.id_tecnico}" th:text="${tecnico.persona.nombre}"></option>
+    </select>
+
+    <label for="estado" style="display: block; margin-bottom: 8px; font-weight: bold;">Estado:</label>
+    <select th:field="*{estado.id_estado}" id="estado" required
+            style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 20px;">
+        <option th:each="estado : ${estadosLista}" th:value="${estado.id_estado}" th:text="${estado.estado}"></option>
+    </select>
+
+    <label for="revision" style="display: block; margin-bottom: 8px; font-weight: bold;">Revisión:</label>
+    <select th:field="*{revision.id_revision}" id="revision" required
+            style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 30px;">
+        <option th:each="rev : ${revisionesLista}" th:value="${rev.id_revision}" th:text="${rev.revision}"></option>
+    </select>
+
+    <button type="submit" style="
+        width: 100%;
+        padding: 10px;
+        background-color: #27ae60;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    ">
+        Guardar
+    </button>
+</form>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a th:href="@{/solicitudes}" style="
+      text-decoration: none;
+      color: #2c3e50;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  ">← Volver al listado</a>
+</div>
+<script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.classList.toggle("show");
+    }
+</script>
+</body>
+</html>
