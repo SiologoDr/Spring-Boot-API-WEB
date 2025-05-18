@@ -1,7 +1,7 @@
 
 # 📘 Digital Buho API - Sistema de Soporte y Gestión Web
 
-![Spring Boot Logo](https://spring.io/img/spring.svg)
+![Proyecto](https://i.ibb.co/JR8GMV5h/image-2.png)
 
 Bienvenido al repositorio unificado de los proyectos **Digital Buho API - SOPORTE** y **Spring Boot API WEB**. Este sistema combina una API RESTful robusta y un conjunto de controladores web, desarrollado con **Spring Boot**, para la gestión integral de datos de soporte técnico y entidades empresariales.
 
@@ -29,6 +29,15 @@ Desarrollar una API RESTful robusta y segura para gestionar información empresa
 
 ---
 
+## 👥 Casos de Uso
+
+- 📚 **Clientes**: Registran solicitudes de soporte.
+- 🛠️ **Técnicos**: Atienden y revisan solicitudes asignadas.
+- 💻 **Desarrolladores**: Consultan tareas pendientes y actualizan el estado.
+- 👨‍💼 **Administradores**: Gestionan usuarios, roles y revisiones.
+
+---
+
 ## 🧩 Tecnologías Utilizadas
 
 - **Java 17+**
@@ -39,6 +48,18 @@ Desarrollar una API RESTful robusta y segura para gestionar información empresa
 - **Maven**
 - **Postman**
 - **Render (Cloud Hosting)**
+
+---
+
+## 🦋 Modelo Logico de la BD
+
+![Logico](https://i.ibb.co/Hp1r7ZTM/Modelo-Logico.png)
+
+---
+
+## 🐢 Modelo Fisico de la BD (SUPABASE)
+
+![Fisico](https://i.ibb.co/XfWhw6vc/Modelo-Fisico.png)
 
 ---
 
@@ -86,12 +107,18 @@ Desarrollar una API RESTful robusta y segura para gestionar información empresa
 | PUT    | `/api/{tabla}/actualizar/{id}`| Actualizar    |
 | DELETE | `/api/{tabla}/eliminar/{id}`  | Eliminar      |
 
+Ejemplo visual de como usar la api en POSTMAN:
+
+![Postman](https://i.ibb.co/tpXgRJvY/Screenshot-2.png)
+
 ---
 
 ## 🧪 Pruebas y Documentación
 
 - **Postman**: Incluye pruebas para cada operación CRUD.
 - **Swagger**: Documentación interactiva disponible en:
+
+![Swagger](https://i.ibb.co/7tjmLJq1/image-1.png)
 
 ```
 https://spring-boot-api-web.onrender.com/swagger-ui/index.html
@@ -125,10 +152,29 @@ Aplicación disponible en: `http://localhost:8080`
 
 ---
 
-## 👤 Autor
+## 📫 Contacto
+
+¿Tienes ideas, sugerencias o encontraste un bug?
+
+- ✉️ Correo: contacto@digitalbuho.com
+- 🐙 GitHub: [@SiologoDr](https://github.com/SiologoDr)
+- 💬 Issues: Usa la sección [Issues](https://github.com/SiologoDr/Spring-Boot-API-WEB/issues) para reportar errores o sugerencias
 
 **Digital Buho SAC**  
 Proyecto desarrollado como parte de una solución empresarial y académica usando tecnologías modernas Java con Spring Boot.
+
+---
+
+## 🤝 Contribuciones
+
+¡Contribuciones, mejoras o reportes de bugs son bienvenidos!  
+Por favor, crea un **Fork** del repositorio, haz tus cambios y envía un **Pull Request**.
+
+1. Fork el proyecto
+2. Crea una rama (`git checkout -b feature/NuevaFuncion`)
+3. Commit tus cambios (`git commit -m 'Agregar nueva función'`)
+4. Push (`git push origin feature/NuevaFuncion`)
+5. Abre un Pull Request
 
 ---
 
