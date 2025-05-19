@@ -192,7 +192,7 @@ Aplicación disponible en: `http://localhost:8080`
 
 ¿Tienes ideas, sugerencias o encontraste un bug?
 
-- ✉️ Correo: contacto@digitalbuho.com
+- ✉️ Correo: yslacadenasj@gmail.com
 - 🐙 GitHub: [@SiologoDr](https://github.com/SiologoDr)
 - 💬 Issues: Usa la sección [Issues](https://github.com/SiologoDr/Spring-Boot-API-WEB/issues) para reportar errores o sugerencias
 
